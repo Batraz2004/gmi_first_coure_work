@@ -20,7 +20,7 @@
   {
     "id": 4,
     "name": "Анна",
-    "role": "moderator",
+    "role": "admin",
     "password": "anna321"
   },
   {
@@ -32,19 +32,19 @@
   {
     "id": 6,
     "name": "Ольга",
-    "role": "user",
+    "role": "supplier",
     "password": "olga111"
   },
   {
     "id": 7,
     "name": "Дмитрий",
-    "role": "moderator",
+    "role": "admin",
     "password": "dima222"
   },
   {
     "id": 8,
     "name": "Елена",
-    "role": "user",
+    "role": "supplier",
     "password": "elena333"
   },
   {

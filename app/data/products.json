@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "user_id": 1,
+    "quantity": 10,
+    "name": "Ноутбук",
+    "price": 999.99
+  },
+  {
+    "id": 2,
+    "user_id": 2,
+    "quantity": 25,
+    "name": "Смартфон",
+    "price": 599.50
+  },
+  {
+    "id": 3,
+    "user_id": 3,
+    "quantity": 5,
+    "name": "Наушники",
+    "price": 89.99
+  },
+  {
+    "id": 4,
+    "user_id": 1,
+    "quantity": 50,
+    "name": "Клавиатура",
+    "price": 45.00
+  },
+  {
+    "id": 5,
+    "user_id": 4,
+    "quantity": 15,
+    "name": "Мышь",
+    "price": 25.50
+  },
+  {
+    "id": 6,
+    "user_id": 5,
+    "quantity": 8,
+    "name": "Монитор",
+    "price": 320.00
+  },
+  {
+    "id": 7,
+    "user_id": 2,
+    "quantity": 12,
+    "name": "Чехол для телефона",
+    "price": 15.99
+  },
+  {
+    "id": 8,
+    "user_id": 6,
+    "quantity": 3,
+    "name": "Игровая приставка",
+    "price": 499.00
+  },
+  {
+    "id": 9,
+    "user_id": 7,
+    "quantity": 20,
+    "name": "Зарядное устройство",
+    "price": 19.95
+  },
+  {
+    "id": 10,
+    "user_id": 8,
+    "quantity": 7,
+    "name": "Внешний жесткий диск",
+    "price": 129.99
+  }
+]

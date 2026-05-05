@@ -38,7 +38,14 @@ public class UserService {
     // Добавить пользователя
     public void add(User user) {
         List<User> users = getAll();
-        user.id = users.size() + 1;
+
+        int maxId = users.stream()
+                .mapToInt(p -> p.id)
+                .max()
+                .orElse(0);
+
+        user.id = maxId + 1;
+
         users.add(user);
         saveAll(users);
     }
