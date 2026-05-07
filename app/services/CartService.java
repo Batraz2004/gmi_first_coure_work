@@ -1,6 +1,7 @@
 package app.services;
 
 import app.data.Models.Cart;
+import app.data.Models.Product;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -11,17 +12,38 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.ArrayList;
 
-public class CartService implements serviceInterface<Cart> {
+public class CartService implements baseService<Cart> {
     private static final String FILE_PATH = "app/data/carts.json";
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private final ProductService productService;
+    private final UserService userService;
+
+    public CartService(ProductService productService, UserService userService) {
+        this.productService = productService;
+        this.userService = userService;
+    }
+
+    public Cart resolve(Cart item) {
+        item.product = productService.findById(item.product_id);
+        item.user = userService.findById(item.user_id);
+        return item;
+    }
 
     // Читать всю корзину из файла
     public List<Cart> getAll() {
         try (FileReader reader = new FileReader(FILE_PATH)) {
             Type listType = new TypeToken<List<Cart>>() {
             }.getType();
+
             List<Cart> cart = gson.fromJson(reader, listType);
-            return cart != null ? cart : new ArrayList<>();
+
+            if (cart == null)
+                return new ArrayList<>();
+
+            cart.forEach(this::resolve);
+            cart.sort((a, b) -> Integer.compare(a.id, b.id));
+
+            return cart;
         } catch (Exception e) {
             return new ArrayList<>();
         }
@@ -32,7 +54,7 @@ public class CartService implements serviceInterface<Cart> {
         try (FileWriter writer = new FileWriter(FILE_PATH)) {
             gson.toJson(cart, writer);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("Ошибка сохранения корзины: " + e.getMessage(), e);
         }
     }
 

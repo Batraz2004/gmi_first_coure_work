@@ -3,7 +3,9 @@ package app.data.Models;
 public class Order {
     public int id;
     public int user_id;
+    public transient User user;
     public int product_id;
+    public transient Product product;
     public Double price;
 
     public Order(int user_id, int product_id, Double price) {

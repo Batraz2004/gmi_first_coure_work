@@ -11,35 +11,28 @@
     "user_id": 2,
     "quantity": 25,
     "name": "Смартфон",
-    "price": 599.50
-  },
-  {
-    "id": 3,
-    "user_id": 3,
-    "quantity": 5,
-    "name": "Наушники",
-    "price": 89.99
+    "price": 599.5
   },
   {
     "id": 4,
     "user_id": 1,
     "quantity": 50,
     "name": "Клавиатура",
-    "price": 45.00
+    "price": 45.0
   },
   {
     "id": 5,
     "user_id": 4,
     "quantity": 15,
     "name": "Мышь",
-    "price": 25.50
+    "price": 25.5
   },
   {
     "id": 6,
     "user_id": 5,
     "quantity": 8,
     "name": "Монитор",
-    "price": 320.00
+    "price": 320.0
   },
   {
     "id": 7,
@@ -53,7 +46,7 @@
     "user_id": 6,
     "quantity": 3,
     "name": "Игровая приставка",
-    "price": 499.00
+    "price": 499.0
   },
   {
     "id": 9,

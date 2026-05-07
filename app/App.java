@@ -9,10 +9,10 @@ public class App {
     private CartService cartService;
 
     public void init() {
-        this.productService = new ProductService();
         this.userService = new UserService();
-        this.orderService = new OrderService();
-        this.cartService = new CartService();
+        this.productService = new ProductService(this.userService);
+        this.orderService = new OrderService(this.productService, this.userService);
+        this.cartService = new CartService(this.productService, this.userService);
     }
 
     public ProductService getProductService() {

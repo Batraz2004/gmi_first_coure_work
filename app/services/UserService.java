@@ -50,10 +50,18 @@ public class UserService implements baseService<User> {
         saveAll(users);
     }
 
-    // Найти по имени
-    public User findByName(String name) {
+    // Найти по id
+    public User findById(int id) {
         return getAll().stream()
-                .filter(u -> u.name.equals(name))
+                .filter(u -> u.id == id)
+                .findFirst()
+                .orElse(null);
+    }
+
+    // Найти по логину
+    public User findByLogin(String login) {
+        return getAll().stream()
+                .filter(u -> u.login.equals(login))
                 .findFirst()
                 .orElse(null);
     }
@@ -65,11 +73,11 @@ public class UserService implements baseService<User> {
         saveAll(users);
     }
 
-    public void update(int id, String name, String password, String role) {
+    public void update(int id, String login, String password, String role) {
         List<User> users = getAll();
         for (User user : users) {
             if (user.id == id) {
-                user.name = name;
+                user.login = login;
                 user.password = password;
                 user.role = role;
                 break;

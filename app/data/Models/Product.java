@@ -3,6 +3,7 @@ package app.data.Models;
 public class Product {
     public int id;
     public int user_id;
+    public transient User user;
     public int quantity;
     public String name;
     // public Category category;

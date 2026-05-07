@@ -4,7 +4,9 @@ public class Cart {
 
     public int id;
     public int user_id;
+    public transient User user;
     public int product_id;
+    public transient Product product;
     public int quantity;
     public Double price;
 

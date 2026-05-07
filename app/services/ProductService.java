@@ -1,5 +1,6 @@
 package app.services;
 
+import app.Enums.SortEnum;
 import app.data.Models.Product;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -12,28 +13,47 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class ProductService implements serviceInterface<Product> {
+public class ProductService implements baseService<Product> {
     private static final String FILE_PATH = "app/data/products.json";
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private UserService userService;
+
+    public ProductService(UserService userService) {
+        this.userService = userService;
+    }
 
     // Читать все товары из файла
     public List<Product> getAll() {
         try (FileReader reader = new FileReader(FILE_PATH)) {
             Type listType = new TypeToken<List<Product>>() {
             }.getType();
+
             List<Product> products = gson.fromJson(reader, listType);
-            return products != null ? products : new ArrayList<>();
+
+            if (products == null)
+                return new ArrayList<>();
+
+            products.forEach(this::resolve);
+
+            products.sort((a, b) -> Integer.compare(a.id, b.id));
+
+            return products;
         } catch (Exception e) {
             return new ArrayList<>();
         }
     }
 
+    public Product resolve(Product product) {
+        product.user = userService.findById(product.user_id);
+        return product;
+    }
+
     // С сортировкой
-    public List<Product> getAll(String sort) {
+    public List<Product> getAll(SortEnum sort) {
         List<Product> products = getAll();
-        if (sort.equals("asc")) {
+        if (sort == SortEnum.Asc) {
             products.sort((a, b) -> Double.compare(a.price, b.price));
-        } else if (sort.equals("desc")) {
+        } else if (sort == SortEnum.Desc) {
             products.sort((a, b) -> Double.compare(b.price, a.price));
         }
         return products;
@@ -73,14 +93,6 @@ public class ProductService implements serviceInterface<Product> {
     public Product findById(int id) {
         return getAll().stream()
                 .filter(p -> p.id == id)
-                .findFirst()
-                .orElse(null);
-    }
-
-    // Найти по названию
-    public Product findByName(String name) {
-        return getAll().stream()
-                .filter(p -> p.name.equals(name))
                 .findFirst()
                 .orElse(null);
     }
