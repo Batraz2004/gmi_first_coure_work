@@ -28,6 +28,17 @@ public class ProductService {
         }
     }
 
+    // С сортировкой
+    public List<Product> getAll(String sort) {
+        List<Product> products = getAll();
+        if (sort.equals("asc")) {
+            products.sort((a, b) -> Double.compare(a.price, b.price));
+        } else if (sort.equals("desc")) {
+            products.sort((a, b) -> Double.compare(b.price, a.price));
+        }
+        return products;
+    }
+
     // Сохранить список в файл
     public void saveAll(List<Product> products) {
         try (FileWriter writer = new FileWriter(FILE_PATH)) {
@@ -49,6 +60,13 @@ public class ProductService {
 
         products.add(product);
         saveAll(products);
+    }
+
+    // Найти по названию
+    public List<Product> searchByName(String query) {
+        return getAll().stream()
+                .filter(p -> p.name.toLowerCase().contains(query.toLowerCase()))
+                .collect(Collectors.toList());
     }
 
     // Найти по id

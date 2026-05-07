@@ -61,7 +61,27 @@ public class Controller {
             String choice = scanner.nextLine();
             switch (choice) {
                 case "1":
-                    List<Product> products = app.getProductService().getAll();
+                    System.out.println("Сортировка по цене:");
+                    System.out.println("1. По возрастанию");
+                    System.out.println("2. По убыванию");
+                    System.out.println("3. Без сортировки");
+                    System.out.print("Выберите: ");
+                    int sortChoice = scanner.nextInt();
+
+                    String sort;
+                    switch (sortChoice) {
+                        case 1:
+                            sort = "asc";
+                            break;
+                        case 2:
+                            sort = "desc";
+                            break;
+                        default:
+                            sort = "none";
+                            break;
+                    }
+
+                    List<Product> products = app.getProductService().getAll(sort);
                     for (Product p : products) {
                         System.out.println(
                                 "id:" + p.id + " | name:" + p.name + " | price:" + p.price + " | qty:" + p.quantity);
