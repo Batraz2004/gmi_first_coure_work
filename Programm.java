@@ -23,10 +23,12 @@ public class Programm {
                     if (authUser.login()) {
                         System.out.print("Вы авторизованы!");
                         System.out.print(authUser);
+
                         Controller controller = new Controller(app, authUser);
                         controller.run();
+                    } else {
+                        System.out.print("не удалось авторизоваться.");
                     }
-
                     break;
                 case "no":
                     break outerLoop;

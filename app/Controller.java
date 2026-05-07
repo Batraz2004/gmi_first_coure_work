@@ -18,35 +18,52 @@ public class Controller {
 
     public void run() {
         if (authUser.isAuthorized()) {
+            String userRole = authUser.getRole();
             while (true) {
                 System.out.println("\n===== ГЛАВНОЕ МЕНЮ =====");
                 System.out.println("1. Товары");
                 System.out.println("2. Корзина");
                 System.out.println("3. Пользователи");
                 System.out.println("4. Заказы");
-                System.out.println("5. Авторизоваться под другой учетной записью");
-                System.out.println("6. Выход");
+                System.out.println("5. Выход");
                 System.out.print("Выберите действие: ");
 
                 int choice = scanner.nextInt();
 
                 switch (choice) {
                     case 1:
-                        productMenu();
+                        if (userRole.equals(RoleEnum.Supplier.label())
+                                || userRole.equals(RoleEnum.Admin.label())) {
+                            this.productMenu();
+                        } else {
+                            System.out.println("нет доступа(permission denied)");
+                        }
                         break;
                     case 2:
-                        cartMenu();
+                        if (userRole.equals(RoleEnum.Supplier.label())
+                                || userRole.equals(RoleEnum.User.label())) {
+                            this.cartMenu();
+                        } else {
+                            System.out.println("нет доступа(permission denied)");
+                        }
                         break;
                     case 3:
-                        userMenu();
+                        if (userRole.equals(RoleEnum.Admin.label())) {
+                            this.userMenu();
+                        } else {
+                            System.out.println("нет доступа(permission denied)");
+                        }
                         break;
                     case 4:
-                        orderMenu();
+                        if (userRole.equals(RoleEnum.User.label())
+                                || userRole.equals(RoleEnum.Admin.label())) {
+                            this.orderMenu();
+                        } else {
+                            System.out.println("нет доступа(permission denied)");
+                        }
                         break;
                     case 5:
-                        authUser.login();
-                        return;
-                    case 6:
+                        this.authUser.logout();
                         System.out.println("До свидания!");
                         return;
                     default:
@@ -54,9 +71,8 @@ public class Controller {
                 }
             }
         } else {
-            System.out.println("Попробуйте еще раз авторизоваться!");
-
-            authUser.login();
+            System.out.println("Поробуйте еще раз авторизоваться");
+            return;
         }
     }
 

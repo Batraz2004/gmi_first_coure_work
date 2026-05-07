@@ -17,10 +17,8 @@ import app.services.UserService;
 public class Auth {
     private static final String FILE_PATH = "app/data/users.json";
 
-    private String role;
     private Boolean isAuthorized;
-    private String name;
-    private String password;
+    private User currentUser = null;
 
     public Boolean login() {
         // ввод лоига и пароля
@@ -42,9 +40,7 @@ public class Auth {
         Boolean result = founderUser != null;
 
         if (result) {
-            this.name = founderUser.name;
-            this.password = founderUser.password;
-            this.role = founderUser.role;
+            this.currentUser = founderUser;
             this.isAuthorized = true;
         }
 
@@ -55,9 +51,18 @@ public class Auth {
         return this.isAuthorized;
     }
 
+    public String getRole() {
+        return this.currentUser.role;
+    }
+
+    public void logout() {
+        this.currentUser = null;
+        this.isAuthorized = false;
+    }
+
     @Override
     public String toString() {
-        String result = String.format("Name: %s, Role: %s", this.name, this.role);
+        String result = String.format("Name: %s, Role: %s", this.currentUser.name, this.currentUser.role);
         return result;
     }
 }
