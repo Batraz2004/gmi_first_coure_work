@@ -46,6 +46,7 @@ public class Auth {
             this.name = founderUser.name;
             this.password = founderUser.password;
             this.role = founderUser.role;
+            this.isAuthorized = true;
 
             return true;
         }
