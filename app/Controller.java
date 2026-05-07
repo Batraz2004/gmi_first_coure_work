@@ -8,41 +8,55 @@ import java.util.Scanner;
 
 public class Controller {
     private final App app;
+    private final Auth authUser;
     private final Scanner scanner = new Scanner(System.in);
 
-    public Controller(App app) {
+    public Controller(App app, Auth authUser) {
         this.app = app;
+        this.authUser = authUser;
     }
 
     public void run() {
-        while (true) {
-            System.out.println("\n===== ГЛАВНОЕ МЕНЮ =====");
-            System.out.println("1. Товары");
-            System.out.println("2. Корзина");
-            System.out.println("3. Пользователи");
-            System.out.println("4. Заказы");
-            System.out.println("5. Выход");
-            System.out.print("Выберите действие: ");
-            String choice = scanner.nextLine();
-            switch (choice) {
-                case "1":
-                    productMenu();
-                    break;
-                case "2":
-                    cartMenu();
-                    break;
-                case "3":
-                    userMenu();
-                    break;
-                case "4":
-                    orderMenu();
-                    break;
-                case "5":
-                    System.out.println("До свидания!");
-                    return;
-                default:
-                    System.out.println("Неверный ввод.");
+        if (authUser.isAuthorized()) {
+            while (true) {
+                System.out.println("\n===== ГЛАВНОЕ МЕНЮ =====");
+                System.out.println("1. Товары");
+                System.out.println("2. Корзина");
+                System.out.println("3. Пользователи");
+                System.out.println("4. Заказы");
+                System.out.println("5. Авторизоваться под другой учетной записью");
+                System.out.println("6. Выход");
+                System.out.print("Выберите действие: ");
+
+                int choice = scanner.nextInt();
+
+                switch (choice) {
+                    case 1:
+                        productMenu();
+                        break;
+                    case 2:
+                        cartMenu();
+                        break;
+                    case 3:
+                        userMenu();
+                        break;
+                    case 4:
+                        orderMenu();
+                        break;
+                    case 5:
+                        authUser.login();
+                        return;
+                    case 6:
+                        System.out.println("До свидания!");
+                        return;
+                    default:
+                        System.out.println("Неверный ввод.");
+                }
             }
+        } else {
+            System.out.println("Попробуйте еще раз авторизоваться!");
+
+            authUser.login();
         }
     }
 
