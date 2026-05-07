@@ -34,5 +34,7 @@ public class Programm {
                     break;
             }
         }
+
+        scannerIn.close();
     }
 }
