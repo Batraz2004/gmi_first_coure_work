@@ -2,22 +2,22 @@ package app.data.Models;
 
 public class User {
     public int id;
-    public String name;
+    public String login;
     public String role;
     public String password;
 
-    public User(String name, String password, String role) {
-        this.name = name;
+    public User(String login, String password, String role) {
+        this.login = login;
         this.role = role;
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getLogin() {
+        return login;
     }
 
     @Override
     public String toString() {
-        return "name:" + this.getName() + "; password:";
+        return "login:" + this.getLogin() + "; password:";
     }
 }

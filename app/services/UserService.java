@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.ArrayList;
 
-public class UserService {
+public class UserService implements baseService<User> {
     private static final String FILE_PATH = "app/data/users.json";
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -38,15 +38,30 @@ public class UserService {
     // Добавить пользователя
     public void add(User user) {
         List<User> users = getAll();
-        user.id = users.size() + 1;
+
+        int maxId = users.stream()
+                .mapToInt(p -> p.id)
+                .max()
+                .orElse(0);
+
+        user.id = maxId + 1;
+
         users.add(user);
         saveAll(users);
     }
 
-    // Найти по имени
-    public User findByName(String name) {
+    // Найти по id
+    public User findById(int id) {
         return getAll().stream()
-                .filter(u -> u.name.equals(name))
+                .filter(u -> u.id == id)
+                .findFirst()
+                .orElse(null);
+    }
+
+    // Найти по логину
+    public User findByLogin(String login) {
+        return getAll().stream()
+                .filter(u -> u.login.equals(login))
                 .findFirst()
                 .orElse(null);
     }
@@ -58,11 +73,11 @@ public class UserService {
         saveAll(users);
     }
 
-    public void update(int id, String name, String password, String role) {
+    public void update(int id, String login, String password, String role) {
         List<User> users = getAll();
         for (User user : users) {
             if (user.id == id) {
-                user.name = name;
+                user.login = login;
                 user.password = password;
                 user.role = role;
                 break;

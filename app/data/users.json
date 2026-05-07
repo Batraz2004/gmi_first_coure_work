@@ -1,62 +1,80 @@
 [
   {
     "id": 1,
-    "name": "Иван",
+    "login": "Иван",
     "role": "admin",
     "password": "admin123"
   },
   {
     "id": 2,
-    "name": "Петр",
+    "login": "Петр",
     "role": "user",
     "password": "pass456"
   },
   {
     "id": 3,
-    "name": "Мария",
+    "login": "Мария",
     "role": "user",
     "password": "maria789"
   },
   {
     "id": 4,
-    "name": "Анна",
-    "role": "moderator",
+    "login": "Анна",
+    "role": "admin",
     "password": "anna321"
   },
   {
     "id": 5,
-    "name": "Сергей",
+    "login": "Сергей",
     "role": "user",
     "password": "serg654"
   },
   {
     "id": 6,
-    "name": "Ольга",
-    "role": "user",
+    "login": "Ольга",
+    "role": "supplier",
     "password": "olga111"
   },
   {
     "id": 7,
-    "name": "Дмитрий",
-    "role": "moderator",
+    "login": "Дмитрий",
+    "role": "admin",
     "password": "dima222"
   },
   {
     "id": 8,
-    "name": "Елена",
-    "role": "user",
+    "login": "Елена",
+    "role": "supplier",
     "password": "elena333"
   },
   {
     "id": 9,
-    "name": "Алексей",
+    "login": "Алексей",
     "role": "admin",
     "password": "alex444"
   },
   {
     "id": 10,
-    "name": "gepcik",
+    "login": "gepcik",
     "role": "user",
     "password": "kkkko"
+  },
+  {
+    "id": 11,
+    "login": "dimentor",
+    "role": "User",
+    "password": "dududu"
+  },
+  {
+    "id": 12,
+    "login": "evgeni2005",
+    "role": "User",
+    "password": "5053"
+  },
+  {
+    "id": 13,
+    "login": "ben-ten",
+    "role": "User",
+    "password": "iok"
   }
 ]

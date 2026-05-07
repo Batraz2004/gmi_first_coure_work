@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "user_id": 2,
+    "product_id": 1,
+    "price": 29.99
+  },
+  {
+    "id": 2,
+    "user_id": 2,
+    "product_id": 2,
+    "price": 49.95
+  },
+  {
+    "id": 3,
+    "user_id": 2,
+    "product_id": 3,
+    "price": 15.50
+  },
+  {
+    "id": 4,
+    "user_id": 3,
+    "product_id": 4,
+    "price": 99.00
+  },
+  {
+    "id": 5,
+    "user_id": 3,
+    "product_id": 5,
+    "price": 7.25
+  },
+  {
+    "id": 6,
+    "user_id": 4,
+    "product_id": 6,
+    "price": 120.00
+  },
+  {
+    "id": 7,
+    "user_id": 5,
+    "product_id": 7,
+    "price": 34.80
+  },
+  {
+    "id": 8,
+    "user_id": 6,
+    "product_id": 8,
+    "price": 65.30
+  },
+  {
+    "id": 9,
+    "user_id": 6,
+    "product_id": 9,
+    "price": 12.99
+  },
+  {
+    "id": 10,
+    "user_id": 8,
+    "product_id": 10,
+    "price": 200.00
+  }
+]
