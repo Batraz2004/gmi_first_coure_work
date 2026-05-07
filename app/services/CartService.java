@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.ArrayList;
 
-public class CartService {
+public class CartService implements serviceInterface<Cart> {
     private static final String FILE_PATH = "app/data/carts.json";
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
 

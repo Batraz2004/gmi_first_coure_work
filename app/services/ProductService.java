@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class ProductService {
+public class ProductService implements serviceInterface<Product> {
     private static final String FILE_PATH = "app/data/products.json";
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
 

@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.ArrayList;
 
-public class UserService {
+public class UserService implements baseService<User> {
     private static final String FILE_PATH = "app/data/users.json";
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
 

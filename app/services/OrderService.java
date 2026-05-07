@@ -1,6 +1,8 @@
 package app.services;
 
 import app.data.Models.Order;
+import app.data.Models.User;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -11,7 +13,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.ArrayList;
 
-public class OrderService {
+public class OrderService implements serviceInterface<Order> {
     private static final String FILE_PATH = "app/data/orders.json";
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
