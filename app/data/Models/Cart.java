@@ -1,5 +1,13 @@
 package app.data.Models;
 
+/**
+ * Модель элемента корзины пользователя.
+ * Поля {@code user} и {@code product} не сериализуются в JSON (transient),
+ * и заполняются через {@code resolve()} в сервисе.
+ *
+ * @author Batraz2004
+ * @version 1.0
+ */
 public class Cart {
 
     public int id;

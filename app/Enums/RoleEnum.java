@@ -1,5 +1,11 @@
 package app.Enums;
 
+/**
+ * Роли пользователей в системе.
+ *
+ * @author Batraz2004
+ * @version 1.0
+ */
 public enum RoleEnum {
     User,
     Supplier,
