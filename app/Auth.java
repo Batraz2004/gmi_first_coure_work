@@ -35,23 +35,20 @@ public class Auth {
         List<User> users = userService.getAll();
 
         User founderUser = users.stream()
-                .filter(u -> u.name == name && u.password == password)
+                .filter(u -> u.name.equals(name) && u.password.equals(password))
                 .findFirst()
                 .orElse(null);
 
         Boolean result = founderUser != null;
 
         if (result) {
-
             this.name = founderUser.name;
             this.password = founderUser.password;
             this.role = founderUser.role;
             this.isAuthorized = true;
-
-            return true;
         }
 
-        return false;
+        return result;
     }
 
     public Boolean isAuthorized() {
@@ -60,7 +57,7 @@ public class Auth {
 
     @Override
     public String toString() {
-        String result = String.format("Name: %s, Role: %d", this.name, this.role);
+        String result = String.format("Name: %s, Role: %s", this.name, this.role);
         return result;
     }
 }
