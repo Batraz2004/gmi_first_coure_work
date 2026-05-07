@@ -7,16 +7,32 @@ import app.data.Models.*;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Обрабатывает пользовательский ввод и управляет меню приложения.
+ * Доступ к разделам ограничен по роли пользователя.
+ *
+ * @author Batraz2004
+ * @version 1.0
+ */
 public class Controller {
     private final App app;
     private final Auth authUser;
     private final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * @param app      инициализированный экземпляр приложения со всеми сервисами
+     * @param authUser авторизованный пользователь текущей сессии
+     */
     public Controller(App app, Auth authUser) {
         this.app = app;
         this.authUser = authUser;
     }
 
+    /**
+     * Запускает главное меню приложения.
+     * Работает в цикле до выбора пункта "Выход".
+     * Доступ к разделу пользователей — только для Admin.
+     */
     public void run() {
         if (authUser.isAuthorized()) {
             while (true) {

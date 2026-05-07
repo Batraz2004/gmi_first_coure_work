@@ -12,6 +12,13 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Сервис для работы с корзиной.
+ * Хранение данных — {@code app/data/carts.json}.
+ *
+ * @author Batraz2004
+ * @version 1.0
+ */
 public class CartService implements baseService<Cart> {
     private static final String FILE_PATH = "app/data/carts.json";
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -23,13 +30,21 @@ public class CartService implements baseService<Cart> {
         this.userService = userService;
     }
 
+    /**
+     * Заполняет transient поля {@code product} и {@code user} из соответствующих сервисов.
+     *
+     * @param item элемент корзины
+     * @return тот же элемент с заполненными связями
+     */
     public Cart resolve(Cart item) {
         item.product = productService.findById(item.product_id);
         item.user = userService.findById(item.user_id);
         return item;
     }
 
-    // Читать всю корзину из файла
+    /**
+     * @return список всех элементов корзины, отсортированный по id
+     */
     public List<Cart> getAll() {
         try (FileReader reader = new FileReader(FILE_PATH)) {
             Type listType = new TypeToken<List<Cart>>() {
@@ -49,7 +64,10 @@ public class CartService implements baseService<Cart> {
         }
     }
 
-    // Сохранить список в файл
+    /**
+     * @param cart список элементов для сохранения
+     * @throws RuntimeException если запись в файл не удалась
+     */
     public void saveAll(List<Cart> cart) {
         try (FileWriter writer = new FileWriter(FILE_PATH)) {
             gson.toJson(cart, writer);
@@ -58,7 +76,11 @@ public class CartService implements baseService<Cart> {
         }
     }
 
-    // Добавить товар в корзину
+    /**
+     * Автоматически присваивает id как maxId + 1.
+     *
+     * @param item новый элемент корзины
+     */
     public void add(Cart item) {
         List<Cart> cart = getAll();
 
@@ -73,14 +95,20 @@ public class CartService implements baseService<Cart> {
         saveAll(cart);
     }
 
-    // Получить корзину пользователя
+    /**
+     * @param userId идентификатор пользователя
+     * @return список элементов корзины пользователя
+     */
     public List<Cart> findByUserId(int userId) {
         return getAll().stream()
                 .filter(c -> c.user_id == userId)
                 .collect(java.util.stream.Collectors.toList());
     }
 
-    // Найти по id
+    /**
+     * @param id идентификатор элемента корзины
+     * @return элемент корзины или {@code null} если не найден
+     */
     public Cart findById(int id) {
         return getAll().stream()
                 .filter(c -> c.id == id)
@@ -88,28 +116,38 @@ public class CartService implements baseService<Cart> {
                 .orElse(null);
     }
 
-    // Удалить товар из корзины по id
+    /**
+     * @param id идентификатор элемента для удаления
+     */
     public void deleteById(int id) {
         List<Cart> cart = getAll();
         cart.removeIf(c -> c.id == id);
         saveAll(cart);
     }
 
-    // Очистить корзину пользователя
+    /**
+     * @param userId идентификатор пользователя чья корзина очищается
+     */
     public void clearByUserId(int userId) {
         List<Cart> cart = getAll();
         cart.removeIf(c -> c.user_id == userId);
         saveAll(cart);
     }
 
-    // Посчитать итого по корзине пользователя
+    /**
+     * @param userId идентификатор пользователя
+     * @return сумма всех товаров в корзине пользователя
+     */
     public Double getTotalByUserId(int userId) {
         return findByUserId(userId).stream()
                 .mapToDouble(c -> c.price * c.quantity)
                 .sum();
     }
 
-    // Редактировать количество товара
+    /**
+     * @param id       идентификатор элемента корзины
+     * @param quantity новое количество
+     */
     public void updateQuantity(int id, int quantity) {
         List<Cart> cart = getAll();
         for (Cart item : cart) {
