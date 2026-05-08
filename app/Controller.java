@@ -12,11 +12,20 @@ public class Controller {
     private final Auth authUser;
     private final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * @param app      инициализированный экземпляр приложения со всеми сервисами
+     * @param authUser авторизованный пользователь текущей сессии
+     */
     public Controller(App app, Auth authUser) {
         this.app = app;
         this.authUser = authUser;
     }
 
+    /**
+     * Запускает главное меню приложения.
+     * Работает в цикле до выбора пункта "Выход".
+     * Доступ к разделу пользователей — только для Admin.
+     */
     public void run() {
         if (authUser.isAuthorized()) {
             while (true) {
@@ -255,9 +264,12 @@ public class Controller {
                             System.out.println("Корзина пуста");
                         } else {
                             for (Cart cartItem : cartItems) {
-                                String productName = cartItem.product != null ? cartItem.product.name : "удалён(id:" + cartItem.product_id + ")";
-                                String userLogin = cartItem.user != null ? cartItem.user.login : "id:" + cartItem.user_id;
-                                System.out.println("id:" + cartItem.id + " | user:" + userLogin + " | product:" + productName + " | qty:" + cartItem.quantity + " | price:" + cartItem.price);
+                                String productName = cartItem.product != null ? cartItem.product.name
+                                        : "удалён(id:" + cartItem.product_id + ")";
+                                String userLogin = cartItem.user != null ? cartItem.user.login
+                                        : "id:" + cartItem.user_id;
+                                System.out.println("id:" + cartItem.id + " | user:" + userLogin + " | product:"
+                                        + productName + " | qty:" + cartItem.quantity + " | price:" + cartItem.price);
                             }
                         }
                         break;
