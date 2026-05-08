@@ -413,14 +413,14 @@ public class Controller {
                             System.out.println("\n--- Пользователь " + (i + 1) + " ---");
 
                             System.out.print("Логин: ");
-                            String mName = this.scanner.nextLine();
+                            String newUserName = this.scanner.nextLine();
 
                             System.out.print("Пароль: ");
-                            String mPassword = this.scanner.nextLine();
+                            String newUserPassword = this.scanner.nextLine();
 
-                            String mRole = this.roleChange();
+                            String newUserRole = this.roleChange();
 
-                            app.getUserService().add(new User(mName, mPassword, mRole));
+                            app.getUserService().add(new User(newUserName, newUserPassword, newUserRole));
                         }
                         System.out.println("Пользователи созданы.");
 
