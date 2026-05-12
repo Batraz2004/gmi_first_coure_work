@@ -76,5 +76,23 @@
     "login": "ben-ten",
     "role": "User",
     "password": "iok"
+  },
+  {
+    "id": 14,
+    "login": "victor",
+    "role": "User",
+    "password": "12313"
+  },
+  {
+    "id": 15,
+    "login": "oleg2008",
+    "role": "User",
+    "password": "okegk123"
+  },
+  {
+    "id": 16,
+    "login": "aslan",
+    "role": "Supplier",
+    "password": "asik321"
   }
 ]

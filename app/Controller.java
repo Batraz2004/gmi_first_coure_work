@@ -195,7 +195,11 @@ public class Controller {
                                     .getProductService()
                                     .findById(delId).id;
 
-                            if (currentUserId != productId && !this.authUser.isAdmin()) {
+                            int productUserId = this.app
+                                    .getProductService()
+                                    .findById(productId).user_id;
+
+                            if (currentUserId != productUserId && !this.authUser.isAdmin()) {
                                 System.out.println("У вас нет прав");
                                 break;
                             }
@@ -216,7 +220,7 @@ public class Controller {
                             for (Product productItem : products) {
                                 System.out.println("id:" + productItem.id + " | name:" + productItem.name + " | price:"
                                         + productItem.price
-                                        + " | qty:" + productItem.quantity);
+                                        + " | quantity:" + productItem.quantity);
                             }
                         } else {
                             System.out.println("Товары не найден.");
@@ -269,7 +273,8 @@ public class Controller {
                                 String userLogin = cartItem.user != null ? cartItem.user.login
                                         : "id:" + cartItem.user_id;
                                 System.out.println("id:" + cartItem.id + " | user:" + userLogin + " | product:"
-                                        + productName + " | qty:" + cartItem.quantity + " | price:" + cartItem.price);
+                                        + productName + " | quantity:" + cartItem.quantity + " | price:"
+                                        + cartItem.price);
                             }
                         }
                         break;
@@ -399,10 +404,12 @@ public class Controller {
 
                         System.out.print("Введите пароль:");
                         String password = this.scanner.nextLine();
-
-                        User user = new User(name, password, "User");
+                        String role = this.roleChange();
+                        
+                        User user = new User(name, password, role);
 
                         app.getUserService().add(user);
+                        System.out.println("Пользователь создан.");
 
                         break;
                     case 5:
@@ -457,24 +464,33 @@ public class Controller {
 
                 switch (choice) {
                     case 1:
+                        List<Order> orders;
+
                         if (this.authUser.isAdmin()) {
-                            List<Order> orders = app.getOrderService().getAll();
-                            for (Order orderItem : orders) {
-                                String productName = orderItem.product != null ? orderItem.product.name
-                                        : "удалён(id:" + orderItem.product_id + ")";
-
-                                String userLogin = orderItem.user != null ? orderItem.user.login
-                                        : "id:" + orderItem.user_id;
-
-                                System.out.println("id:" + orderItem.id + " | user:" + userLogin + " | product:"
-                                        + productName + " | price:" + orderItem.price);
-                            }
+                            orders = app.getOrderService().getAll();
                         } else {
-                            System.out.println("У вас нет прав");
+                            orders = app.getOrderService().findByUserId(currentUserId);
+
+                        }
+
+                        if (orders.isEmpty()) {
+                            System.out.println(this.authUser.isAdmin() ? "Заказов нет." : "У вас нет заказов.");
+                            break;
+                        }
+
+                        for (Order orderItem : orders) {
+                            String productName = orderItem.product != null ? orderItem.product.name
+                                    : "удалён(id:" + orderItem.product_id + ")";
+
+                            String userLogin = orderItem.user != null ? orderItem.user.login
+                                    : "id:" + orderItem.user_id;
+
+                            System.out.println("id:" + orderItem.id + " | user:" + userLogin + " | product:"
+                                    + productName + " | price:" + orderItem.price);
                         }
                         break;
                     case 2:
-                        List<Order> orders = app.getOrderService().findByUserId(currentUserId);
+                        orders = app.getOrderService().findByUserId(currentUserId);
 
                         for (Order orderItem : orders) {
                             String productName = orderItem.product != null ? orderItem.product.name
