@@ -7,6 +7,13 @@ import app.data.Models.*;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Обрабатывает пользовательский ввод и управляет меню приложения.
+ * Доступ к разделам ограничен по роли пользователя.
+ *
+ * @author Batraz2004
+ * @version 1.0
+ */
 public class Controller {
     private final App app;
     private final Auth authUser;

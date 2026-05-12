@@ -1,5 +1,11 @@
 package app.data.Models;
 
+/**
+ * Модель пользователя системы.
+ *
+ * @author Batraz2004
+ * @version 1.0
+ */
 public class User {
     public int id;
     public String login;
