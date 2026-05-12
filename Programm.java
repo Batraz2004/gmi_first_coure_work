@@ -15,7 +15,9 @@ public class Programm {
 
             outerLoop: while (true) {
                 System.out.println("Войти:(yes/no)");
-                String choice = scannerIn.nextLine();
+                String choice = scannerIn.nextLine()
+                        .replaceAll("[\\p{Cntrl}\\s]", "")
+                        .toLowerCase();
 
                 switch (choice) {
                     case "yes":

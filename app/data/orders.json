@@ -15,13 +15,13 @@
     "id": 3,
     "user_id": 2,
     "product_id": 3,
-    "price": 15.50
+    "price": 15.5
   },
   {
     "id": 4,
     "user_id": 3,
     "product_id": 4,
-    "price": 99.00
+    "price": 99.0
   },
   {
     "id": 5,
@@ -33,19 +33,19 @@
     "id": 6,
     "user_id": 4,
     "product_id": 6,
-    "price": 120.00
+    "price": 120.0
   },
   {
     "id": 7,
     "user_id": 5,
     "product_id": 7,
-    "price": 34.80
+    "price": 34.8
   },
   {
     "id": 8,
     "user_id": 6,
     "product_id": 8,
-    "price": 65.30
+    "price": 65.3
   },
   {
     "id": 9,
@@ -57,6 +57,12 @@
     "id": 10,
     "user_id": 8,
     "product_id": 10,
-    "price": 200.00
+    "price": 200.0
+  },
+  {
+    "id": 11,
+    "user_id": 2,
+    "product_id": 12,
+    "price": 389.97
   }
 ]
